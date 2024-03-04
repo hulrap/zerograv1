@@ -23,7 +23,6 @@
         <br>
         <button id="mintButton" onclick="mintNFT();" disabled>Mint NFT</button>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4-rc.1/web3.min.js"></script>
     <script>
         let totalMinted = 0; // Beispielwert, sollte dynamisch abgefragt werden
         const maxMints = 13; // Beispielwert, sollte dynamisch abgefragt werden
@@ -41,16 +40,16 @@
 
         async function connect() {
             if (window.ethereum) {
-                await window.ethereum.request({ method: "eth_requestAccounts" });
-                window.web3 = new Web3(window.ethereum);
-                const accounts = await web3.eth.getAccounts();
-                if (accounts.length > 0) {
+                try {
+                    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
                     connectedAccount = accounts[0];
                     updateWalletDisplay(connectedAccount);
                     document.getElementById("mintButton").disabled = false;
+                } catch (error) {
+                    console.error("Error connecting to wallet:", error);
                 }
             } else {
-                console.log("No wallet");
+                console.log("No Ethereum provider found. Install MetaMask.");
             }
         }
 
@@ -71,19 +70,26 @@
                 return;
             }
 
+            // Fügen Sie hier den ABI und die Adresse Ihres Smart Contracts ein
             const contractAddress = "0xc9f0c7A6Fef896DeBd1628BDCEdeA21ff29a8576";
             const contractABI = [/* Contract ABI */];
-            const contract = new web3.eth.Contract(contractABI, contractAddress);
+            
+            // Erstellen Sie hier ein neues Contract-Instance mit dem Ethereum-Provider
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const contract = new ethers.Contract(contractAddress, contractABI, signer);
 
-            contract.methods.mint(connectedAccount).send({ from: connectedAccount })
-                .then(function(receipt){
-                    console.log("Mint transaction receipt: ", receipt);
-                    totalMinted += 1; // Beispielhafte Erhöhung, sollte basierend auf dem tatsächlichen Ergebnis aktualisiert werden
-                    updateMintInfo();
-                })
-                .catch(function(error){
-                    console.error("Minting failed: ", error);
-                });
+            try {
+                const tx = await contract.mint(connectedAccount);
+                console.log("Mint transaction sent:", tx);
+                await tx.wait();
+                console.log("Mint transaction confirmed:", tx);
+                // Aktualisieren Sie die Anzahl der geminteten NFTs
+                totalMinted += 1;
+                updateMintInfo();
+            } catch (error) {
+                console.error("Minting failed:", error);
+            }
         }
 
         // Initialisiere die Mint-Info und Wallet-Anzeige beim Laden der Seite
@@ -91,5 +97,7 @@
             updateMintInfo();
         };
     </script>
+    <!-- ethers.js - Eine komplette Ethereum-Bibliothek -->
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="text/javascript"></script>
 </body>
 </html>
