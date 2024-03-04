@@ -17,25 +17,37 @@
     </header>
     <main>
         <p>Hier könnte Ihre Inhaltsbeschreibung stehen.</p>
-        <div id="walletDisplay">Connect Wallet</div>
+        <button id="walletButton" onclick="connectOrDisconnect();">Connect Wallet</button>
         <br>
         <div id="mintInfo">Minted: 0 / Left: 0</div>
         <br>
-        <input type="button" value="Mint" onclick="mintNFT();">
+        <button id="mintButton" onclick="mintNFT();" disabled>Mint NFT</button>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4-rc.1/web3.min.js"></script>
     <script>
         let totalMinted = 0; // Beispielwert, sollte dynamisch abgefragt werden
         const maxMints = 13; // Beispielwert, sollte dynamisch abgefragt werden
+        let connectedAccount = null;
+
+        async function connectOrDisconnect() {
+            if (connectedAccount) {
+                connectedAccount = null;
+                document.getElementById("walletButton").innerText = 'Connect Wallet';
+                document.getElementById("mintButton").disabled = true;
+            } else {
+                await connect();
+            }
+        }
 
         async function connect() {
             if (window.ethereum) {
                 await window.ethereum.request({ method: "eth_requestAccounts" });
                 window.web3 = new Web3(window.ethereum);
-                checkNetwork();
                 const accounts = await web3.eth.getAccounts();
-                if(accounts.length > 0) {
-                    updateWalletDisplay(accounts[0]);
+                if (accounts.length > 0) {
+                    connectedAccount = accounts[0];
+                    updateWalletDisplay(connectedAccount);
+                    document.getElementById("mintButton").disabled = false;
                 }
             } else {
                 console.log("No wallet");
@@ -44,38 +56,26 @@
 
         async function updateMintInfo() {
             // Hier sollte der Code stehen, der die tatsächlich gemintete Anzahl abfragt
-            // totalMinted = await contract.methods.totalSupply().call();
             const mintInfo = document.getElementById("mintInfo");
             mintInfo.innerText = `Minted: ${totalMinted} / Left: ${maxMints - totalMinted}`;
         }
 
         function updateWalletDisplay(account) {
-            const displayText = `${account.substring(0, 5)}...${account.substring(account.length - 4)}`;
-            document.getElementById("walletDisplay").innerText = `Connected: ${displayText}`;
-        }
-
-        async function checkNetwork() {
-            let chainId = await web3.eth.getChainId();
-            if (chainId !== 11155111) { // Chain ID for Sepolia Testnet
-                try {
-                    await window.ethereum.request({
-                        method: 'wallet_switchEthereumChain',
-                        params: [{ chainId: web3.utils.toHex(11155111) }], // Sepolia Testnet
-                    });
-                } catch (switchError) {
-                    console.error('Could not switch to the Sepolia network:', switchError);
-                }
-            }
-            updateMintInfo();
+            const displayText = `${account.substring(0, 6)}...${account.substring(account.length - 4)}`;
+            document.getElementById("walletButton").innerText = `Wallet: ${displayText}`;
         }
 
         async function mintNFT() {
+            if (!connectedAccount) {
+                console.error("No connected account.");
+                return;
+            }
+
             const contractAddress = "0xc9f0c7A6Fef896DeBd1628BDCEdeA21ff29a8576";
             const contractABI = [/* Contract ABI */];
             const contract = new web3.eth.Contract(contractABI, contractAddress);
-            const accounts = await web3.eth.getAccounts();
 
-            contract.methods.mint(accounts[0]).send({ from: accounts[0] })
+            contract.methods.mint(connectedAccount).send({ from: connectedAccount })
                 .then(function(receipt){
                     console.log("Mint transaction receipt: ", receipt);
                     totalMinted += 1; // Beispielhafte Erhöhung, sollte basierend auf dem tatsächlichen Ergebnis aktualisiert werden
