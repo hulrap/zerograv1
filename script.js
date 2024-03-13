@@ -17,45 +17,62 @@ const contractABI = [
 
 let web3Modal, provider, ethersProvider, selectedAccount;
 async function init() {
-    // Provider Options including support for WalletConnect
-    const providerOptions = {
+    // script.js
+// Assuming Web3Modal and Ethers have been loaded via script tags
+
+// Define the projectId provided by WalletConnect Cloud
+const projectId = '707fce437c93a109f73c0055c32e1f66'; // Replace with your actual project ID
+
+// Set the network details
+const mainnet = {
+  chainId: 11155111,
+  name: 'Sepolia',
+  currency: 'ETH',
+  explorerUrl: 'https://sepolia.etherscan.io',
+  rpcUrl: 'https://sepolia.infura.io/v3/a45e7d96b0684e47931ffad90c2d9019' // Replace with your Infura URL
+};
+
+// Define your application's metadata
+const metadata = {
+  name: 'My Website',
+  description: 'My Website description',
+  url: 'https://zerograv.xyz', // Ensure this URL matches your actual domain
+  icons: ['https://avatars.mywebsite.com/'] // Replace with your actual icon URL
+};
+
+// Create Web3Modal instance
+let modal;
+
+window.addEventListener('DOMContentLoaded', () => {
+  modal = createWeb3Modal({
+    projectId: projectId,
+    metadata: metadata,
+    disableInjectedProvider: false,
+    cacheProvider: true,
+    providerOptions: {
       walletconnect: {
-        package: WalletConnectProvider, // Assuming WalletConnectProvider is globally available
+        package: WalletConnectProvider, // the walletconnect provider package you installed
         options: {
-          projectId: "707fce437c93a109f73c0055c32e1f66" // Use your Wallet Connect Project ID here
+          infuraId: projectId // your infura project id
         }
-      }
-    };
-
-    web3Modal = new Web3Modal({
-        network: "sepolia",
-        cacheProvider: true,
-        providerOptions // Set the provider options here
-    });
-
-    document.getElementById('walletButton').addEventListener('click', onConnect);
-}
-
-async function onConnect() {
-    try {
-        provider = await web3Modal.connect();
-        ethersProvider = new ethers.providers.Web3Provider(provider);
-
-        const accounts = await ethersProvider.listAccounts();
-        selectedAccount = accounts[0];
-        document.getElementById('walletInfo').textContent = selectedAccount;
-
-        const network = await ethersProvider.getNetwork();
-        if (network.chainId !== parseInt(sepoliaChainId, 16)) {
-            alert('Please switch to the Sepolia network.');
-        } else {
-            document.getElementById('mintButton').disabled = false;
-        }
-    } catch (e) {
-        console.error(e);
-        alert('Could not connect to wallet.');
+      },
+      // ... include any other providers you want to support
     }
-}
+  });
+
+  // Get references to HTML elements
+  const connectButton = document.getElementById('connectButton');
+  const userAddressSpan = document.getElementById('userAddress');
+
+  // Event listeners
+  connectButton.addEventListener('click', async () => {
+    const provider = await modal.connect();
+    const ethersProvider = new ethers.providers.Web3Provider(provider);
+    const userAddress = await ethersProvider.getSigner().getAddress();
+    userAddressSpan.textContent = userAddress;
+  });
+});
+
 
 async function mintNFT() {
     if (!selectedAccount) {
