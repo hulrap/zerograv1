@@ -18,8 +18,6 @@ const contractABI = [
 let web3Modal, provider, ethersProvider, selectedAccount;
 async function init() {
     // Setzen Sie die Provider-Optionen, einschließlich der Unterstützung für WalletConnect
-  import Web3Modal from 'web3modal';
-
     const providerOptions = {
       walletconnect: {
         package: window.WalletConnectProvider, // Use the global variable here
