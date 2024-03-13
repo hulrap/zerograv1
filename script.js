@@ -22,7 +22,7 @@ async function init() {
       walletconnect: {
         package: WalletConnectProvider, // Assuming WalletConnectProvider is globally available
         options: {
-          infuraId: "707fce437c93a109f73c0055c32e1f66" // Use your Wallet Connect Project ID here
+          projectId: "707fce437c93a109f73c0055c32e1f66" // Use your Wallet Connect Project ID here
         }
       }
     };
