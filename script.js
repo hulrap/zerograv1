@@ -20,13 +20,14 @@ let web3Modal, provider, ethersProvider, selectedAccount;
 async function init() {
     // Setzen Sie die Provider-Optionen, einschließlich der Unterstützung für WalletConnect
     const providerOptions = {
-        walletconnect: {
-            package: WalletConnectProvider,
-            options: {
-                infuraId: "a45e7d96b0684e47931ffad90c2d9019" // Ersetzen Sie dies durch Ihre eigene Infura ID
-            }
-        }
-    };
+      walletconnect: {
+        package: window.WalletConnectProvider, // Use the global variable here
+        options: {
+          infuraId: "a45e7d96b0684e47931ffad90c2d9019" // Your Infura ID
+    }
+  }
+};
+
 
     web3Modal = new Web3Modal({
         network: "sepolia",
