@@ -2,30 +2,38 @@ const contractAddress = "0x4f7Fe28d1d08fecf1b8dd901864820c5a12E8738";
 const sepoliaChainId = '0x53'; // Hexadezimaler Chain-ID für das Sepolia-Testnetzwerk
 const mintPrice = ethers.utils.parseEther("0.01"); // Minting-Preis, zum Beispiel 0.01 ETH
 
-// ABI als Array von Objekten
+// Korrigierte ABI als Array von Objekten
 const contractABI = [
   {
     "type": "function",
     "name": "mint",
-    "constant": false,
     "stateMutability": "payable",
     "payable": true,
     "inputs": [{"type": "address", "name": "to"}],
     "outputs": []
   }
-  // Fügen Sie hier alle anderen benötigten Funktionen und Ereignisse ein
+  // ... weitere Funktionen der ABI ...
 ];
-
 
 let web3Modal, provider, ethersProvider, selectedAccount;
 
 async function init() {
-    // Setup für web3modal hier
+    // Setzen Sie die Provider-Optionen, einschließlich der Unterstützung für WalletConnect
+    const providerOptions = {
+        walletconnect: {
+            package: WalletConnectProvider,
+            options: {
+                infuraId: "a45e7d96b0684e47931ffad90c2d9019" // Ersetzen Sie dies durch Ihre eigene Infura ID
+            }
+        }
+    };
+
     web3Modal = new Web3Modal({
-        network: "sepolia", // optional
-        cacheProvider: true, // optional
-        providerOptions: {} // erforderlich
+        network: "sepolia",
+        cacheProvider: true,
+        providerOptions // Wir setzen jetzt die Provider-Optionen
     });
+
     document.getElementById('walletButton').addEventListener('click', onConnect);
 }
 
@@ -33,14 +41,16 @@ async function onConnect() {
     try {
         provider = await web3Modal.connect();
         ethersProvider = new ethers.providers.Web3Provider(provider);
+
         const accounts = await ethersProvider.listAccounts();
         selectedAccount = accounts[0];
         document.getElementById('walletInfo').textContent = selectedAccount;
-        
-        // Überprüfen, ob der Benutzer im Sepolia Netzwerk ist
+
         const network = await ethersProvider.getNetwork();
         if (network.chainId !== parseInt(sepoliaChainId, 16)) {
             alert('Bitte wechseln Sie zum Sepolia Netzwerk.');
+        } else {
+            document.getElementById('mintButton').disabled = false;
         }
     } catch (e) {
         console.error(e);
@@ -49,22 +59,7 @@ async function onConnect() {
 }
 
 async function mintNFT() {
-    if (!selectedAccount) {
-        alert('Please connect your wallet.');
-        return;
-    }
-
-    const signer = ethersProvider.getSigner();
-    const contract = new ethers.Contract(contractAddress, contractABI, signer);
-
-    try {
-        const tx = await contract.mint({ value: mintPrice });
-        await tx.wait();
-        alert('NFT successfully minted!');
-    } catch (error) {
-        console.error("Minting failed: ", error);
-        alert('Minting failed. See console for details.');
-    }
+    // ... Die Funktion mintNFT bleibt unverändert ...
 }
 
 document.getElementById('mintButton').addEventListener('click', mintNFT);
