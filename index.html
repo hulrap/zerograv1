@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zerograv Main Page</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/web3modal"></script>
     <script src="https://cdn.ethers.io/lib/ethers-5.5.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider"></script>
@@ -19,94 +20,15 @@
     </header>
     <main>
         <p>Hier könnte Ihre Inhaltsbeschreibung stehen.</p>
-        <button id="walletButton">Connect Wallet</button>
+        <div id="walletConnection">
+            <button id="walletButton">Connect Wallet</button>
+            <div id="walletInfo"></div>
+            <div id="networkStatus"></div>
+        </div>
         <div id="networkDisplay">Connected Network: -</div>
         <div id="mintInfo">Minted: 0 / Left: 0</div>
         <button id="mintButton" disabled>Mint NFT for 0.01 ETH</button>
     </main>
-    <script>
-        const contractAddress = "0xEf44bF30CE46a1312fBb588b7d9F60e34de9C29d";
-        const contractABI = ["[{"inputs":[{"internalType":"address","name":"_scriptyStorageAddress","type":"address"},{"internalType":"address","name":"_scriptyBuilderAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"PUBLIC_MINT_PRICE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"VIP_MINT_PRICE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"WHITELIST_MINT_PRICE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"addresses","type":"address[]"}],"name":"addToVIPList","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address[]","name":"addresses","type":"address[]"}],"name":"addToWhitelist","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"toList","type":"address[]"},{"internalType":"uint256","name":"mintCount","type":"uint256"}],"name":"batchMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenTransferCount","type":"uint256"},{"internalType":"uint256","name":"_timeSinceMintBefore","type":"uint256"},{"internalType":"uint256","name":"_onlineMeanOfTransferTimes","type":"uint256"},{"internalType":"uint256","name":"_momentum","type":"uint256"}],"name":"constructMetadataParts","outputs":[{"internalType":"string[4]","name":"","type":"string[4]"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenID","type":"uint256"},{"internalType":"uint256","name":"_tokenTransferCount","type":"uint256"}],"name":"constructMetadataParts3d","outputs":[{"internalType":"string","name":"nr_points","type":"string"},{"internalType":"string","name":"typeTrait","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenID","type":"uint256"},{"internalType":"uint256","name":"_tokenTransferCount","type":"uint256"},{"internalType":"uint256","name":"_lastTransferTimestamp","type":"uint256"},{"internalType":"uint256","name":"_tokenMintTimestamp","type":"uint256"}],"name":"constructMetadataPartsGenArt","outputs":[{"internalType":"string","name":"typeTrait","type":"string"},{"internalType":"string","name":"hueShiftTrait","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"_timeSinceMintBefore","type":"uint256"},{"internalType":"uint256","name":"_onlineMeanOfTransferTimes","type":"uint256"}],"name":"constructMetadataPartsSchrift","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenTransferCount","type":"uint256"},{"internalType":"uint256","name":"_tokenMintTimestamp","type":"uint256"},{"internalType":"uint256","name":"_lastTransferTimestamp","type":"uint256"},{"internalType":"uint256","name":"_totalTradeVolume","type":"uint256"},{"internalType":"uint256","name":"_tokenID","type":"uint256"},{"internalType":"uint256","name":"_timeSinceMintBefore","type":"uint256"},{"internalType":"uint256","name":"_onlineMeanOfTransferTimes","type":"uint256"},{"internalType":"uint256","name":"_momentum","type":"uint256"}],"name":"createInitData","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"currentPhase","outputs":[{"internalType":"enum allinone3.MintPhase","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"mint","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"address","name":"referralAddress","type":"address"}],"name":"mint_with_ref","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"ownedTokens","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenTransferCount","type":"uint256"},{"internalType":"uint256","name":"_tokenMintTimestamp","type":"uint256"},{"internalType":"uint256","name":"_lastTransferTimestamp","type":"uint256"},{"internalType":"uint256","name":"_totalTradeVolume","type":"uint256"},{"internalType":"uint256","name":"_tokenID","type":"uint256"},{"internalType":"uint256","name":"_timeSinceMintBefore","type":"uint256"},{"internalType":"uint256","name":"lastTransferTimestampChange","type":"uint256"},{"internalType":"uint256","name":"_onlineMeanOfTransferTimes","type":"uint256"},{"internalType":"uint256","name":"_momentum","type":"uint256"},{"internalType":"uint256","name":"RelVol","type":"uint256"}],"name":"render_3d","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenTransferCount","type":"uint256"},{"internalType":"uint256","name":"_tokenMintTimestamp","type":"uint256"},{"internalType":"uint256","name":"_lastTransferTimestamp","type":"uint256"},{"internalType":"uint256","name":"_totalTradeVolume","type":"uint256"},{"internalType":"uint256","name":"_tokenID","type":"uint256"},{"internalType":"uint256","name":"_timeSinceMintBefore","type":"uint256"},{"internalType":"uint256","name":"lastTransferTimestampChange","type":"uint256"},{"internalType":"uint256","name":"_onlineMeanOfTransferTimes","type":"uint256"},{"internalType":"uint256","name":"_momentum","type":"uint256"},{"internalType":"uint256","name":"RelVol","type":"uint256"}],"name":"render_deck","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenTransferCount","type":"uint256"},{"internalType":"uint256","name":"_tokenMintTimestamp","type":"uint256"},{"internalType":"uint256","name":"_lastTransferTimestamp","type":"uint256"},{"internalType":"uint256","name":"_totalTradeVolume","type":"uint256"},{"internalType":"uint256","name":"_tokenID","type":"uint256"},{"internalType":"uint256","name":"_timeSinceMintBefore","type":"uint256"},{"internalType":"uint256","name":"lastTransferTimestampChange","type":"uint256"},{"internalType":"uint256","name":"_onlineMeanOfTransferTimes","type":"uint256"},{"internalType":"uint256","name":"_momentum","type":"uint256"},{"internalType":"uint256","name":"RelVol","type":"uint256"}],"name":"render_schrift","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"},{"internalType":"uint256","name":"_salePrice","type":"uint256"}],"name":"royaltyInfo","outputs":[{"internalType":"address","name":"receiver","type":"address"},{"internalType":"uint256","name":"royaltyAmount","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"scriptyBuilderAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"scriptyStorageAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"enum allinone3.MintPhase","name":"phase","type":"uint8"}],"name":"setMintPhase","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_receiver","type":"address"}],"name":"setRoyaltyReceiver","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"tokenData","outputs":[{"internalType":"uint256","name":"transferCount","type":"uint256"},{"internalType":"uint256","name":"mintTimestamp","type":"uint256"},{"internalType":"bytes32","name":"seed","type":"bytes32"},{"internalType":"uint256","name":"lastTransferTimestamp","type":"uint256"},{"internalType":"uint256","name":"TimeSinceMintBefore","type":"uint256"},{"internalType":"uint256","name":"lastTransferTimestampChange","type":"uint256"},{"internalType":"uint256","name":"OnlineMeanOfTransferTimes","type":"uint256"},{"internalType":"uint256","name":"Momentum","type":"uint256"},{"internalType":"uint256","name":"RelVol","type":"uint256"},{"internalType":"bool","name":"needsUpdate","type":"bool"},{"internalType":"bool","name":"payedWithRoyalties","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalMintedSoFar","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalTradeVolume","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]"];
-            
-        const sepoliaChainId = '0x53';
-        let web3Modal, provider, ethersProvider, selectedAccount;
-
-        async function init() {
-            const providerOptions = {
-                walletconnect: {
-                    package: WalletConnectProvider,
-                    options: {
-                        infuraId: "a45e7d96b0684e47931ffad90c2d9019", // Replace with your Infura ID
-                    }
-                },
-                // Add more providers here
-            };
-
-            web3Modal = new Web3Modal({
-                cacheProvider: false, // Optional
-                providerOptions, // required
-                disableInjectedProvider: false, // Optional. For MetaMask / Brave / Opera.
-            });
-
-            document.getElementById('walletButton').addEventListener('click', onConnect);
-        }
-
-        async function onConnect() {
-            try {
-                provider = await web3Modal.connect();
-                ethersProvider = new ethers.providers.Web3Provider(provider);
-
-                // Subscribe to accounts change
-                provider.on("accountsChanged", (accounts) => {
-                    fetchAccountData();
-                });
-
-                // Subscribe to chainId change
-                provider.on("chainChanged", (chainId) => {
-                    fetchAccountData();
-                });
-
-                await fetchAccountData();
-            } catch (e) {
-                console.error(e);
-                displayPopup("Please install MetaMask.");
-            }
-        }
-
-        async function fetchAccountData() {
-            const network = await ethersProvider.getNetwork();
-
-            if (network.chainId !== parseInt(sepoliaChainId, 16)) {
-                document.getElementById('networkDisplay').innerText = "Wrong Network. Please switch to Sepolia.";
-                document.getElementById('mintButton').disabled = true;
-                return;
-            } else {
-                document.getElementById('networkDisplay').innerText = "Connected Network: Sepolia";
-                document.getElementById('mintButton').disabled = false;
-            }
-
-            const accounts = await ethersProvider.listAccounts();
-            selectedAccount = accounts[0];
-            document.getElementById('mintButton').addEventListener('click', mintNFT);
-        }
-
-        async function mintNFT() {
-            const signer = ethersProvider.getSigner();
-            const contract = new ethers.Contract(contractAddress, contractABI, signer);
-            try {
-                const tx = await contract.mint({value: ethers.utils.parseEther("0.01")});
-                await tx.wait();
-                console.log("Minted successfully.");
-            } catch (error) {
-                console.error("Minting failed: ", error);
-            }
-        }
-
-        function displayPopup(message) {
-            alert(message);
-        }
-
-        window.onload = init;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
