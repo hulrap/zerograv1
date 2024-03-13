@@ -1,6 +1,6 @@
 const contractAddress = "0x4f7Fe28d1d08fecf1b8dd901864820c5a12E8738";
 const sepoliaChainId = '0x53';
-const whitelistAddresses = ['0x76FE342CBF94b009A443E98d999B076BfF1cbb1d']; // Ersetze durch tatsächliche Whitelist-Adressen
+const whitelistAddresses = ['0x76FE342CBF94b009A443E98d999B076BfF1cbb1d', '0x9E15f9ecfD57f0237e158e1F7Ba6c125c9796Fb6']; // Ersetze durch tatsächliche Whitelist-Adressen
 
 let web3Modal, provider, ethersProvider, selectedAccount;
 
