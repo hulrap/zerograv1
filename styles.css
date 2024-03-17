@@ -73,6 +73,7 @@ button:disabled {
     
     background-color: #008CBA;
     color: white;
+    visibility: hidden;
 }
 
 #networkDisplay {
