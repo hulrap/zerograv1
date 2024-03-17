@@ -30,6 +30,8 @@ async function connectWallet() {
 
     document.getElementById('walletButton').textContent = 'Wallet Connected';
     document.getElementById('walletButton').disabled = true; // Optionally, disable the button
+    
+    document.getElementById('networkStatus').visiblity = "visible";
 
 
     
