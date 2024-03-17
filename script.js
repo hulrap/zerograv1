@@ -8,6 +8,9 @@ const contractABI = "[{\"type\":\"constructor\",\"payable\":false,\"inputs\":[{\
 let ethersProvider;
 let selectedAccount;
 
+setupNetworkChangeListener(); // Existing setup
+startMintInfoUpdateLoop(); // Start the loop for updating mint info
+
 async function connectWallet() {
   if (!window.ethereum) {
     alert('Please install MetaMask to use this feature.');
@@ -24,8 +27,7 @@ async function connectWallet() {
 
     document.getElementById('walletInfo').textContent = `Wallet Address: ${selectedAccount}`;
     checkNetwork();
-    setupNetworkChangeListener(); // Existing setup
-    startMintInfoUpdateLoop(); // Start the loop for updating mint info
+    
 
   } catch (error) {
     console.error("Connection error:", error);
