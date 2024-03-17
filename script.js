@@ -24,13 +24,15 @@ async function connectWallet() {
     await ethersProvider.send("eth_requestAccounts", []);
     const signer = ethersProvider.getSigner();
     selectedAccount = await signer.getAddress();
+    
+    document.getElementById('networkStatus').classList.remove('hidden');
 
     document.getElementById('walletInfo').textContent = `Wallet Address: ${selectedAccount}`;
     checkNetwork();
 
     document.getElementById('walletButton').textContent = 'Wallet Connected';
     document.getElementById('walletButton').disabled = true; // Optionally, disable the button
-  
+
 
     
 
