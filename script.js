@@ -24,6 +24,9 @@ async function connectWallet() {
 
     document.getElementById('walletInfo').textContent = `Wallet Address: ${selectedAccount}`;
     checkNetwork();
+    setupNetworkChangeListener(); // Existing setup
+    startMintInfoUpdateLoop(); // Start the loop for updating mint info
+
   } catch (error) {
     console.error("Connection error:", error);
   }
@@ -93,6 +96,31 @@ async function mintNFT() {
     alert('Minting failed. See console for details.');
   }
 }
+
+async function updateMintInfo() {
+    if (!ethersProvider) {
+        console.log('Ethers provider is not initialized.');
+        return;
+    }
+
+    const contract = new ethers.Contract(contractAddress, contractABI, ethersProvider);
+    try {
+        // Assuming your contract has these methods. Replace with actual methods if different.
+        const totalMinted = await contract.totalMintedSoFar();
+        const totalSupply = await contract.maxSupply();
+        
+        // Update the UI
+        document.getElementById('mintInfo').textContent = `Minted: ${totalMinted.toString()} / Total Supply: ${totalSupply.toString()}`;
+    } catch (error) {
+        console.error("Error fetching mint information:", error);
+    }
+}
+
+function startMintInfoUpdateLoop() {
+    updateMintInfo(); // Initial update
+    setInterval(updateMintInfo, 5000); // Update every 5 seconds
+}
+
 
 // Initialization and event listeners
 document.addEventListener('DOMContentLoaded', () => {
