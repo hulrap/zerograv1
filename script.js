@@ -27,6 +27,11 @@ async function connectWallet() {
 
     document.getElementById('walletInfo').textContent = `Wallet Address: ${selectedAccount}`;
     checkNetwork();
+
+    document.getElementById('walletButton').textContent = 'Wallet Connected';
+    document.getElementById('walletButton').disabled = true; // Optionally, disable the button
+
+
     
 
   } catch (error) {
