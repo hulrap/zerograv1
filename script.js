@@ -15,6 +15,8 @@ async function connectWallet() {
   }
   ethersProvider = new ethers.providers.Web3Provider(window.ethereum);
 
+  setupNetworkChangeListener(); // Set up the listener for network changes
+
   try {
     await ethersProvider.send("eth_requestAccounts", []);
     const signer = ethersProvider.getSigner();
@@ -26,6 +28,22 @@ async function connectWallet() {
     console.error("Connection error:", error);
   }
 }
+
+// added later
+function setupNetworkChangeListener() {
+  window.ethereum.on('chainChanged', (_chainId) => {
+    // Reset ethers provider to ensure it uses the new network's information
+    ethersProvider = new ethers.providers.Web3Provider(window.ethereum);
+    // Re-check the network and update UI accordingly
+    checkNetwork();
+    // Optionally, reset the selected account or re-fetch it
+    ethersProvider.getSigner().getAddress().then(address => {
+      selectedAccount = address;
+      document.getElementById('walletInfo').textContent = `Wallet Address: ${selectedAccount}`;
+    }).catch(console.error);
+  });
+}
+
 
 async function checkNetwork() {
   const network = await ethersProvider.getNetwork();
