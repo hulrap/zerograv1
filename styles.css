@@ -16,9 +16,10 @@ body {
 header {
   color: #fff;
   padding-top: 15px;
-  padding-left: 15%;
   text-align: center;
   width: 60%;
+	margin-left: auto;
+	margin-right: auto;
 }
 nav ul {
   padding: 0;
@@ -83,6 +84,9 @@ button:disabled {
 }
 .hidden {
   display: none;
+}
+h2, strong {
+	font-weight: 500;
 }
 .wave {
   background: #DEEDD5;
