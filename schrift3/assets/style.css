@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  position: relative; /* Ändern Sie dies zu 'relative' für Flexbox-Zentrierung */
+  z-index: 1;
+  font-family: 'Bangers', cursive;
+  background: rgb(133, 108, 108);
+  /* Entfernen Sie top und left, da Flexbox die Zentrierung übernimmt */
+}
+
+a {
+  color: rgb(235, 9, 9);
+  position: fixed; /* Ändern zu 'fixed' oder 'absolute', abhängig von der gewünschten Position relativ zum Viewport */
+  bottom: 50px;
+  left: 50%; /* Zentriert den Link horizontal */
+  transform: translateX(-50%); /* Korrigiert die Zentrierung basierend auf der Breite des Links */
+  z-index: 100;
+  text-decoration: none; /* Optional: Entfernt Unterstreichung von Links */
+}

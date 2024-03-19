@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 545.49 190.72">
+  <defs>
+    <filter id="inset-shadow">
+      <feOffset dx="1" dy="1"/>
+      <feGaussianBlur result="offset-blur" stdDeviation="1"/>
+      <feComposite in="SourceGraphic" in2="offset-blur" operator="out" result="inverse"/>
+      <feFlood flood-color="black" flood-opacity=".30" result="color"/>
+      <feComposite in="color" in2="inverse" operator="in" result="shadow"/>
+      <feComposite in="shadow" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g style="filter: url(#inset-shadow);">
+    <path d="m56.26,110.33h-12.4l-2.08,9.5h-10.24l11.43-48.99h14.25l11.43,48.99h-10.24l-2.15-9.5Zm-10.61-8.31h8.83l-2.6-11.88c-.52-2.3-1.56-9.28-1.56-9.28h-.52s-.82,6.31-1.48,9.28l-2.67,11.88Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m73.69,70.84h14.99c10.32,0,16.92,5.72,16.92,19.3v12.77c0,11.13-5.27,16.92-14.7,16.92h-17.22v-48.99Zm10.02,8.31v32.36h4.9c4.23,0,6.98-2,6.98-9.87v-11.21c0-9.2-3.12-11.28-8.68-11.28h-3.19Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m135.15,119.83l-6.46-17.3c-.52-1.41-1.19-2-2.6-2h-3.04v19.3h-10.02v-48.99h14.92c11.51,0,16.26,5.64,16.26,14.77v1.19c0,6.01-2.6,10.09-7.27,12.1v.22c1.19.74,1.93,2.15,2.6,4.01l6.24,16.7h-10.61Zm-12.1-40.68v14.1h4.16c4.82,0,6.98-1.71,6.98-6.16v-.74c0-5.27-2.08-7.2-7.79-7.2h-3.34Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m151.4,70.84h23.75v8.31h-13.73v11.73h11.51v7.27h-11.51v13.36h14.47v8.31h-24.5v-48.99Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m193.04,92.59c-.74-1.63-1.48-4.38-1.48-4.38l-.45.07.45,6.16v25.39h-10.02v-48.99h11.13l12.77,27.24c.67,1.41,1.48,4.45,1.48,4.45l.37-.07-.37-6.23v-25.39h10.02v48.99h-11.13l-12.77-27.24Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m246.7,110.33h-12.4l-2.08,9.5h-10.24l11.43-48.99h14.25l11.43,48.99h-10.24l-2.15-9.5Zm-10.61-8.31h8.83l-2.6-11.88c-.52-2.3-1.56-9.28-1.56-9.28h-.52s-.82,6.31-1.48,9.28l-2.67,11.88Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m264.14,70.84h10.02v40.68h12.99v8.31h-23.01v-48.99Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m292.57,70.84h10.02v48.99h-10.02v-48.99Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m322.55,92.59c-.74-1.63-1.49-4.38-1.49-4.38l-.45.07.45,6.16v25.39h-10.02v-48.99h11.13l12.77,27.24c.67,1.41,1.48,4.45,1.48,4.45l.37-.07-.37-6.23v-25.39h10.02v48.99h-11.13l-12.77-27.24Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m354.91,70.84h23.75v8.31h-13.73v11.73h11.51v7.27h-11.51v13.36h14.47v8.31h-24.5v-48.99Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m401.37,70.84h23.75v8.31h-13.73v12.25h11.51v7.87h-11.51v20.56h-10.02v-48.99Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m430.76,70.84h23.75v8.31h-13.73v11.73h11.51v7.27h-11.51v13.36h14.47v8.31h-24.5v-48.99Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m460.89,70.84h23.75v8.31h-13.73v11.73h11.51v7.27h-11.51v13.36h14.47v8.31h-24.5v-48.99Z" style="fill: #fff; stroke-width: 0px;"/>
+    <path d="m491.03,70.84h10.02v40.68h12.99v8.31h-23.01v-48.99Z" style="fill: #fff; stroke-width: 0px;"/>
+  </g>
+</svg>
