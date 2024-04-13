@@ -548,7 +548,7 @@ nav #nav-list li a:hover {
 }
 .board {
     border-radius: 485px;
-    top: 21px;
+    top: 333px;
     -webkit-box-shadow: 8px 8px 12px 4px rgba(0, 0, 0, 0.27);
     box-shadow: 8px 8px 12px 4px rgba(0, 0, 0, 0.27);
     color: #CFDC9A;
@@ -569,6 +569,11 @@ nav #nav-list li a:hover {
     hyphens: auto !important;
     text-align: justify;
     display: block;
+}
+.sticky {
+  position: sticky;
+  z-index: 1;
+  bottom: 0px;
 }
 #board_01 {
   border-radius: 485px;
