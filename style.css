@@ -396,7 +396,7 @@ img {
   text-align: center;
 }
 strong {
-  font-weight: 600;
+    font-weight: 900;
 }
 /* font variants end */
 .logo {
@@ -870,3 +870,4 @@ h1 {
   }
 	
 }
+
