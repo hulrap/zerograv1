@@ -81,7 +81,7 @@ async function switchNetwork() {
     }
 }
 async function mintNFT() {
-    checkNetwork();
+    await checkNetwork();
 
     ethersProvider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = ethersProvider.getSigner();
