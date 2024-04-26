@@ -1,5 +1,5 @@
 const contractAddress = "0xa774F8B2df0A34858959aE597598BAcF42f22a37";
-const mintPrice_float = 0.0
+const mintPrice_float = .0
 const mintPrice = ethers.utils.parseEther(mintPrice_float.toString()).toString();
 document.getElementById('mintButton').textContent = `Mint NFT for ${mintPrice_float} ETH`;
 
@@ -88,6 +88,7 @@ async function mintNFT() {
       return;
     }
     
+    checkNetwork();
     
     const contract = new ethers.Contract(contractAddress, contractABI, signer);
   
