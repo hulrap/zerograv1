@@ -21,25 +21,14 @@ header {
   margin-left: auto;
   margin-right: auto;
 }
-nav ul {
-  padding: 0;
-  list-style: none;
-}
-nav ul li {
-  display: inline;
-  margin-right: 10px;
-}
-nav ul li a {
-  color: #000000;
-}
 main {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 20px;
-    text-align: center;
-    top: 0px;
-    margin-top: -18px;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 20px;
+  text-align: center;
+  top: 0px;
+  margin-top: -18px;
 }
 button {
   padding: 10px 20px;
@@ -73,13 +62,13 @@ button:disabled {
   display: inline-block;
 }
 #networkStatus {
-    /*width: 15px;
+  /*width: 15px;
     height: 15px;
     border-radius: 50%;
     display: inline-block;
     vertical-align: middle;*/
-    background-color: #F4B400;
-    color: white;
+  background-color: #F4B400;
+  color: white;
 }
 #networkDisplay {
   margin: 10px;
@@ -89,8 +78,15 @@ button:disabled {
   display: none;
 }
 h2, strong {
-    font-weight: 500;
-    line-height: 0px;
+  font-weight: 500;
+  line-height: 1px;
+}
+h4 {
+  font-weight: 700;
+  margin-bottom: 0px;
+}
+p {
+  margin: 4px;
 }
 .wave {
   background: #DEEDD5;
@@ -112,8 +108,6 @@ h2, strong {
   margin-top: 60px;
   overflow: hidden;
   z-index: -2;
-  background-image: url("images/bg05.jpg");
-  mix-blend-mode: soft-light;
 }
 /*fläche*/
 .wave:nth-of-type(3) {
@@ -173,17 +167,6 @@ h2, strong {
   }
   100% {
     transform: translateX(1) rotate(360deg);
-  }
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(0);
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
   }
 }
 .gradient2 {
