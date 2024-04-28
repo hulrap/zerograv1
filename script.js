@@ -1,5 +1,5 @@
 const contractAddress = "0xa774F8B2df0A34858959aE597598BAcF42f22a37";
-const mintPrice_float = 0.0255
+const mintPrice_float = 0.03
 const mintPrice = ethers.utils.parseEther(mintPrice_float.toString()).toString();
 
 document.getElementById('mintButton').textContent = `Mint NFT for ${mintPrice_float} ETH`;
