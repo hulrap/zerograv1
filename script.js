@@ -8,7 +8,7 @@ const contractABI = "[{\"type\":\"constructor\",\"payable\":false,\"inputs\":[{\
 
 
 const BASE_SEPOLIA_CHAIN_ID = '0x2105'; // Chain ID für Base
-const BASE_SEPOLIA_RPC_URL = 'https://mainnet.base.org';
+const BASE_SEPOLIA_RPC_URL = 'https://base.llamarpc.com';
 const BASE_blockExplorerUrl = "https://basescan.org"
 const BASE_chainName = 'Base Mainnet'
 let ethersProvider;
